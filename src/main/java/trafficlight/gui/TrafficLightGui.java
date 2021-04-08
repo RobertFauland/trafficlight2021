@@ -1,6 +1,7 @@
 package trafficlight.gui;
 
 import trafficlight.ctrl.TrafficLightCtrl;
+import trafficlight.states.State;
 import trafficlight.states.TrafficLightColor;
 
 import javax.swing.*;
@@ -85,6 +86,7 @@ public class TrafficLightGui extends JFrame implements ActionListener {
             }
              while (isAutoMode) {
                  //TODO call the controller
+                 trafficLightCtrl.nextState();
 
                 try {
                     if (yellow.isOn) {
@@ -114,5 +116,20 @@ public class TrafficLightGui extends JFrame implements ActionListener {
 
     public void setLight(TrafficLightColor trafficLightColor){
         //TODO setLight
+        if (trafficLightColor == TrafficLightColor.RED) {
+            red.turnOn(true);
+            yellow.turnOn(false);
+            green.turnOn(false);
+        }
+        if (trafficLightColor == TrafficLightColor.YELLOW){
+            red.turnOn(false);
+            yellow.turnOn(true);
+            green.turnOn(false);
+        }
+        if (trafficLightColor == TrafficLightColor.GREEN) {
+            red.turnOn(false);
+            yellow.turnOn(false);
+            green.turnOn(true);
+        }
     }
 }
